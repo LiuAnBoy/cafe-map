@@ -1,7 +1,7 @@
 import express, { Application } from 'express';
 
 import Locals from './Locals';
-import ExceptionHandler from '../exception/Handler';
+// import ExceptionHandler from '../services/exception/handler';
 import Bootstrap from '../middlewares/index';
 import Routes from './Routes';
 
@@ -34,8 +34,8 @@ class Express {
   public init() {
     const port: number = Locals.config().port;
 
-    // Registering Exception / Error Handlers
-    this.express.use(ExceptionHandler.errorHandler);
+    // // Registering Exception / Error Handlers
+    // this.express.use(ExceptionHandler.errorHandler);
 
     // Start the server on the specified port
     this.express
