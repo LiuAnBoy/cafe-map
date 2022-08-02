@@ -5,4 +5,5 @@ export interface ILocalType {
   apiKey: string;
   nearbyMapUrl: string;
   detailMapUrl: string;
+  taipeiCenterPot: string;
 }
