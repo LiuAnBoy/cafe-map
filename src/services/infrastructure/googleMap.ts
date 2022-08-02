@@ -2,6 +2,7 @@ import { INearbyLocation } from '../../interface/googleMap/nearbyLocation';
 import { IDetailLocation } from '../../interface/googleMap/detailLocation';
 import Locals from '../../provider/Locals';
 import Http from './http';
+import { ICafeNextPage } from '../../interface/googleMap/nextPageLocation';
 
 const http = new Http();
 
@@ -20,7 +21,7 @@ export async function requestGetNearbyLocation({
     language,
   };
 
-  const result = await http.getRequest(nearbyMapUrl, params);
+  const result = await http.getRequest<any>(nearbyMapUrl, params);
   return result;
 }
 
@@ -32,6 +33,14 @@ export async function requestGetDetailLocation({
   const { detailMapUrl } = Locals.config();
   const params: IDetailLocation = { place_id, language, key };
 
-  const result = await http.getRequest(detailMapUrl, params);
+  const result = await http.getRequest<any>(detailMapUrl, params);
+  return result;
+}
+
+export async function requestGetNextPageLocation(pagetoken: string) {
+  const { nearbyMapUrl, apiKey } = Locals.config();
+  const params: ICafeNextPage = { pagetoken, key: apiKey };
+
+  const result = await http.getRequest<any>(nearbyMapUrl, params);
   return result;
 }
