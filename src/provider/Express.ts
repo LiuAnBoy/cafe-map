@@ -4,6 +4,7 @@ import Locals from './Locals';
 // import ExceptionHandler from '../services/exception/handler';
 import Bootstrap from '../middlewares/index';
 import Routes from './Routes';
+import path from 'path';
 
 class Express {
   public express: Application;
@@ -36,6 +37,16 @@ class Express {
 
     // // Registering Exception / Error Handlers
     // this.express.use(ExceptionHandler.errorHandler);
+
+    // Server statics assets in production
+    if (process.env.NODE_ENV === 'production') {
+      // Set static folder
+      this.express.use(express.static('client/build'));
+
+      this.express.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+      });
+    }
 
     // Start the server on the specified port
     this.express
