@@ -1,10 +1,10 @@
 import express, { Application } from 'express';
+import path from 'path';
 
 import Locals from './Locals';
 // import ExceptionHandler from '../services/exception/handler';
 import Bootstrap from '../middlewares/index';
 import Routes from './Routes';
-import path from 'path';
 
 class Express {
   public express: Application;

@@ -40,7 +40,7 @@ yarn.lock
 # vercel
 */.vercel
 
-# #client
+#client
 /client/node_modules
 /client/build
 /client/.pnp

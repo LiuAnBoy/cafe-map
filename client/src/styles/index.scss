@@ -1,0 +1,21 @@
+@import '~antd/dist/antd.css';
+@import './components.scss';
+@import './pages.scss';
+
+$contentBgColor: #fff;
+
+$starIconColor: #fadb14;
+
+.ant-layout-content {
+  background-color: $contentBgColor;
+}
+
+h1 {
+  font-size: 30px;
+  margin: 0;
+}
+
+.anticon-star {
+  color: $starIconColor;
+  font-size: 14px;
+}
