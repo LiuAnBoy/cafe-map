@@ -9,8 +9,8 @@
     "client": "yarn --cwd ./client start",
     "dev": "concurrently \"yarn server\" \"yarn client\"",
     "build": "tsc --project './tsconfig.json'",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
-    "postinstall": "tsc -w"
+    "tsc": "./node_modules/typescript/bin/tsc",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run tsc && npm install --prefix client && npm run build --prefix client"
   },
   "dependencies": {
     "axios": "^0.27.2",
