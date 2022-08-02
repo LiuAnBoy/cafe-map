@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  plugins: ['@typescript-eslint', 'prettier'],
+  plugins: ['react', '@typescript-eslint', 'prettier'],
   extends: [
     'airbnb-base',
     'eslint:recommended',
@@ -12,12 +12,18 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
   rules: {
     'prettier/prettier': ['error', { singleQuote: true }],
     'no-unused-vars': 'off',
+    'react/jsx-filename-extension': [0, { extensions: ['.js', '.jsx'] }],
+    'react/prop-types': 'off', // Since we do not use prop-types
+    'react/require-default-props': 'off', // Since we do not use prop-types
     '@typescript-eslint/no-unused-vars': ['warn'],
     'import/prefer-default-export': 0,
     'no-shadow': 'off',

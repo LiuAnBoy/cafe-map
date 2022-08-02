@@ -1,4 +1,4 @@
-import { Database } from '../Database';
+import { Database } from './Database';
 import Express from './Express';
 
 /* eslint class-methods-use-this: "off" */

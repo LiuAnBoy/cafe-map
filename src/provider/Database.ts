@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { MongoError } from 'mongodb';
 
-import Locals from '../provider/Locals';
+import Locals from './Locals';
 
 export class Database {
   public static init() {

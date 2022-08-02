@@ -10,7 +10,23 @@ class Locals {
     const url = process.env.SERVER_URL || `http://localhost:${port}`;
     const mongoUrl = process.env.MONGO_URI || '';
 
-    return { url, port, mongoUrl };
+    const apiKey = process.env.GOOGLE_MAP_KEY || '';
+
+    const taipeiCenterPot = '25.0445928,121.5428118';
+    const nearbyMapUrl =
+      'https://maps.googleapis.com/maps/api/place/nearbysearch/json';
+    const detailMapUrl =
+      'https://maps.googleapis.com/maps/api/place/details/json';
+
+    return {
+      url,
+      port,
+      mongoUrl,
+      apiKey,
+      nearbyMapUrl,
+      detailMapUrl,
+      taipeiCenterPot,
+    };
   }
 
   public static init(_express: Application): Application {
