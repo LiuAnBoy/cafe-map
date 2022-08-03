@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { Error, PipelineStage } from 'mongoose';
-import { ICafeShop } from '../../interface/model/cafeShop';
+// import { ICafeShop } from '../../interface/model/cafeShop';
 
 import CafeShop from '../../models/cafeShop';
 
