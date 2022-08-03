@@ -12,5 +12,7 @@ router.get('/fetchAllDetailLocation', Fetch.fetchAllDetailLocationData);
 
 router.get('/cafeshop', Web.getShopData);
 router.get('/downloadXlsx', Web.downloadXlsx);
+// TODO: format Phone number
+// router.get('/formatphonenumber', Web.formatPhoneNumber);
 
 export default router;

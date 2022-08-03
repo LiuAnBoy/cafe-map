@@ -56,6 +56,16 @@ class Web {
         .send({ success: false, message: 'Internal Server Error' });
     }
   }
+
+  // public static async formatPhoneNumber(req: Request, res: Response) {
+  //   // const cafeShop = await CafeShop.find();
+
+  //   const regex = new RegExp(/abc/);
+
+  //   const text = regex.test('02-2222');
+
+  //   console.log(text);
+  // }
 }
 
 export default Web;

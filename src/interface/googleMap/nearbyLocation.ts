@@ -4,4 +4,5 @@ export interface INearbyLocation {
   keyword: string;
   language: string;
   key?: string;
+  type?: string;
 }

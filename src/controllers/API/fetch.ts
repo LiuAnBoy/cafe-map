@@ -25,15 +25,17 @@ class Fetch {
     const radius = req.query.radius as string | number;
     const keyword = req.query.keyword as string;
     const language = req.query.language as string;
+    const type = req.query.type as string;
 
     const params: INearbyLocation = {
       location,
       radius,
       keyword,
       language,
+      type,
     };
 
-    if (!location || !keyword) {
+    if (!location) {
       return res
         .status(404)
         .send({ success: false, message: 'PLEASE CHECK YOUR INPUT.' });
@@ -111,6 +113,7 @@ class Fetch {
       }
 
       return res.status(200).send({ success: true, message: '解析完成' });
+      // return res.status(200).send(data);
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error);
@@ -147,10 +150,14 @@ class Fetch {
 
       const data = result.data.result;
 
-      delete data.opening_hours.open_now;
+      if (data.opening_hours) {
+        delete data.opening_hours.open_now;
+      }
 
       const updateData: ICafeShop = {
-        phone: data.formatted_phone_number ? data.formatted_phone_number : null,
+        phone: data.formatted_phone_number
+          ? data.formatted_phone_number.split(' ').join('-')
+          : null,
         address: data.formatted_address ? data.formatted_address : null,
         website: data.website ? data.website : null,
         url: data.url ? data.url : null,
