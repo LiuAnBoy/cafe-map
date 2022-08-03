@@ -8,6 +8,7 @@ export const listTableColumns: ColumnsType<ICafeShop> = [
   {
     title: '店家名稱',
     dataIndex: 'name',
+    width: '30%',
     render: (value, record) => (
       <span>
         <a target="_blank" rel="noreferrer" href={record.url}>
@@ -19,6 +20,7 @@ export const listTableColumns: ColumnsType<ICafeShop> = [
   {
     title: '電話',
     dataIndex: 'phone',
+    render: (value) => <span>{value || 'N/A'}</span>,
   },
   {
     title: '地址',
