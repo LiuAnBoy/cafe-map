@@ -15,14 +15,7 @@ function App() {
       <Layout>
         <SiderBar />
         <Layout>
-          <Content
-            className="site-layout-background"
-            style={{
-              padding: 24,
-              margin: 0,
-              height: 'calc(100vh - 64px)',
-            }}
-          >
+          <Content className="main-content">
             <Routes>
               {routes.map((route: RoutesProps) => (
                 <Route

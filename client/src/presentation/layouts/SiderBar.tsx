@@ -26,7 +26,6 @@ const SiderBar: FC = () => {
       <Menu
         theme="dark"
         mode="inline"
-        style={{ height: 'calc(100vh - 64px)', borderRight: 0 }}
         selectedKeys={[handleSelectedKey()]}
       >
         {siderLink.map((link) => (

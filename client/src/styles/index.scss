@@ -6,8 +6,17 @@ $contentBgColor: #fff;
 
 $starIconColor: #fadb14;
 
+$mainFontColor: #222;
+
 .ant-layout-content {
   background-color: $contentBgColor;
+}
+
+.main-content {
+  padding: 24px;
+  margin: 0;
+  height: 100%;
+  min-height: calc(100vh - 64px);
 }
 
 h1 {
@@ -15,7 +24,4 @@ h1 {
   margin: 0;
 }
 
-.anticon-star {
-  color: $starIconColor;
-  font-size: 14px;
-}
+

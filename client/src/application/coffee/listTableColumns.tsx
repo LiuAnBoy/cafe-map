@@ -27,7 +27,7 @@ export const listTableColumns: ColumnsType<ICafeShop> = [
   },
   {
     title: '評等',
-    dataIndex: 'rating',
+    dataIndex: 'rate',
     render: (value, record) => (
       <Space>
         <span>

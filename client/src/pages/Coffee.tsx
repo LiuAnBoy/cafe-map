@@ -1,5 +1,6 @@
-import { Table } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Table, Spin } from 'antd';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import CustomButton from '../presentation/components/CustomButton';
 import CustomSelect from '../presentation/components/CustomSelect';
@@ -10,10 +11,15 @@ import useCafeShop from '../application/coffee/useCafeShop';
 
 const CoffeePage = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
-  const { cafeShop } = useCafeShop();
+  const location = searchParams.get('location');
 
-  const handleChange = (value: string) => {
+  const { cafeShopData, downloadSheet } = useCafeShop();
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const handleLocationChange = (value: string) => {
     if (value) {
       navigate(`?location=${value}`);
     } else {
@@ -21,21 +27,35 @@ const CoffeePage = () => {
     }
   };
 
+  useEffect(() => {
+    cafeShopData.length === 0 ? setIsLoading(true) : setIsLoading(false);
+  }, [cafeShopData]);
+
   return (
     <section>
       <h1>Coffee Shop List</h1>
       <div className="coffee-panel">
         <div>
           地區：
-          <CustomSelect options={selectOptions} onChange={handleChange} />
+          <CustomSelect
+            options={selectOptions}
+            value={location || ''}
+            onChange={handleLocationChange}
+          />
         </div>
-        <CustomButton label="匯出資料" type="primary" />
+        <CustomButton
+          label="匯出資料"
+          type="primary"
+          onClick={() => downloadSheet(location)}
+        />
       </div>
-      <Table
-        dataSource={cafeShop}
-        columns={listTableColumns}
-        rowKey={(record) => record.shopId as string}
-      />
+      <Spin spinning={isLoading}>
+        <Table
+          dataSource={cafeShopData}
+          columns={listTableColumns}
+          rowKey={(record) => record.shopId}
+        />
+      </Spin>
     </section>
   );
 };

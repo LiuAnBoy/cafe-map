@@ -8,3 +8,11 @@ export const requestGetCoffeeShop = async (location?: string | null) => {
 
   return result;
 };
+
+export const requestDownloadXlsx = async (location?: string | null) => {
+  const path = '/api/downloadXlsx';
+  const params = { location };
+  const result = await getRequest<any>(path, params);
+
+  return result;
+};

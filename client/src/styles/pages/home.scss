@@ -1,0 +1,29 @@
+.location-panel {
+  margin-top: 16px;
+}
+
+.ant-card-type-inner .ant-card-head-title {
+  font-size: 24px;
+}
+
+.ant-card-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.ant-card-body > p {
+  margin: 0;
+  margin-right: 32px;
+  font-size: 16px;
+  
+
+  &:hover {
+    border-bottom: 1px solid #222;
+    cursor: pointer;
+  }
+
+  & > a {
+    color: #222;
+  }
+}

@@ -11,5 +11,6 @@ router.get('/detaillocation', Fetch.detailLocation);
 router.get('/fetchAllDetailLocation', Fetch.fetchAllDetailLocationData);
 
 router.get('/cafeshop', Web.getShopData);
+router.get('/downloadXlsx', Web.downloadXlsx);
 
 export default router;
