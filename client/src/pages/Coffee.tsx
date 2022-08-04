@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Table, Spin } from 'antd';
+import { Spin } from 'antd';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import CustomButton from '../presentation/components/CustomButton';
 import CustomSelect from '../presentation/components/CustomSelect';
+import useMessage from '../application/components/useMesaage';
 import { selectOptions } from '../application/coffee/selectOptions';
-import { listTableColumns } from '../application/coffee/listTableColumns';
 
 import useCafeShop from '../application/coffee/useCafeShop';
+import CafeShopTable from '../presentation/layouts/CafeShopTable';
 
 const CoffeePage = () => {
   const navigate = useNavigate();
@@ -15,9 +16,12 @@ const CoffeePage = () => {
 
   const location = searchParams.get('location');
 
-  const { cafeShopData, downloadSheet } = useCafeShop();
+  const { cafeShopData, downloadSheet, deleteCafeShop, getAllCafeShop } =
+    useCafeShop();
+  const { successMessage, errorMessage } = useMessage();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleLocationChange = (value: string) => {
     if (value) {
@@ -25,6 +29,25 @@ const CoffeePage = () => {
     } else {
       navigate('');
     }
+  };
+
+  const handleDeleteModalOpen = () => {
+    setIsOpen(true);
+  };
+
+  const handleDeleteModalClose = () => {
+    setIsOpen(false);
+  };
+
+  const handleDelete = async (shopId: string) => {
+    setIsLoading(true);
+    const res = await deleteCafeShop(shopId);
+    if (res?.status !== 200) {
+      return errorMessage(res?.data.message);
+    }
+    setIsLoading(false);
+    successMessage('刪除成功');
+    return getAllCafeShop();
   };
 
   useEffect(() => {
@@ -50,10 +73,12 @@ const CoffeePage = () => {
         />
       </div>
       <Spin spinning={isLoading}>
-        <Table
+        <CafeShopTable
           dataSource={cafeShopData}
-          columns={listTableColumns}
-          rowKey={(record) => record.shopId}
+          isOpen={isOpen}
+          handleDeleteModalOpen={handleDeleteModalOpen}
+          handleDeleteModalClose={handleDeleteModalClose}
+          handleDelete={handleDelete}
         />
       </Spin>
     </section>

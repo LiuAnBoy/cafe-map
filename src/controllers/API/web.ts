@@ -5,7 +5,7 @@ import { Error, PipelineStage } from 'mongoose';
 import CafeShop from '../../models/cafeShop';
 
 class Web {
-  public static async getShopData(req: Request, res: Response) {
+  public static async getAllCafeShop(req: Request, res: Response) {
     const location = req.query.location;
 
     try {
@@ -15,6 +15,31 @@ class Web {
       }
       const result = await CafeShop.find();
       return res.status(200).send(result);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error);
+        return res.send(error.message);
+      }
+      console.log(error);
+      return res
+        .status(500)
+        .send({ success: false, message: 'Internal Server Error' });
+    }
+  }
+
+  public static async getCafeShop(req: Request, res: Response) {
+    const shopId = req.params.shopId;
+
+    try {
+      const result = await CafeShop.findOne({ shopId });
+
+      if (!result) {
+        return res
+          .status(404)
+          .send({ success: false, message: '沒有找到任何咖啡廳', data: {} });
+      }
+
+      return res.status(200).send({ success: true, data: result });
     } catch (error) {
       if (error instanceof Error) {
         console.log(error);
@@ -66,6 +91,33 @@ class Web {
 
   //   console.log(text);
   // }
+
+  public static async deleteCafeShop(req: Request, res: Response) {
+    const shopId = req.params.shopId;
+
+    try {
+      const cafeShop = await CafeShop.findOne({ shopId });
+
+      if (!cafeShop) {
+        return res
+          .status(404)
+          .send({ success: false, message: '沒有找到任何咖啡廳' });
+      }
+
+      await CafeShop.deleteOne({ shopId });
+
+      return res.status(200).send({ success: true, message: '刪除成功' });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error);
+        return res.send(error.message);
+      }
+      console.log(error);
+      return res
+        .status(500)
+        .send({ success: false, message: 'Internal Server Error' });
+    }
+  }
 }
 
 export default Web;
